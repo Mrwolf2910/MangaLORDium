@@ -1,0 +1,240 @@
+// Дані прикладів товарів
+const productsData = [
+  { id:1, title: 'Наруто: Фігурка', desc: 'Колекційна фігурка Наруто', img: 'https://picsum.photos/seed/naru/400/300', price: 899.00 },
+  { id:2, title: 'Моя геройська академія: Плакат', desc: 'Плакат All Might', img: 'https://picsum.photos/seed/mha/400/300', price: 249.50 },
+  { id:3, title: 'Зошит смерті: Рюкзак', desc: 'Стильний рюкзак Death Note', img: 'https://picsum.photos/seed/dn/400/300', price: 1299.00 },
+  { id:4, title: 'One Piece: Кепка', desc: 'Кепка з мотивами One Piece', img: 'https://picsum.photos/seed/op/400/300', price: 199.99 },
+  { id:5, title: 'Demon Slayer: Фігурка', desc: 'Колекційна фігурка Tanjiro', img: 'https://picsum.photos/seed/ds/400/300', price: 749.00 }
+];
+
+const productsEl = document.getElementById('products');
+const searchInput = document.getElementById('search');
+const clearBtn = document.getElementById('clearSearch');
+const themeToggle = document.getElementById('themeToggle');
+
+function renderProducts(list){
+  productsEl.innerHTML = '';
+  if(list.length === 0){
+    productsEl.innerHTML = '<p class="muted">Нічого не знайдено</p>';
+    return;
+  }
+
+  list.forEach(p => {
+    const card = document.createElement('article');
+    card.className = 'product hover-anim';
+    card.setAttribute('tabindex','0');
+    card.innerHTML = `
+      <img src="${p.img}" alt="${p.title}">
+      <h3 class="accent">${p.title}</h3>
+      <p>${p.desc}</p>
+      <div class="meta-row">
+        <span class="price">${p.price.toFixed(2)} ₴</span>
+        <button class="add-btn" data-id="${p.id}">Додати в кошик</button>
+      </div>
+    `;
+
+    // Hover animation using anime.js: pulse color & scale
+    card.addEventListener('mouseenter', ()=> productHoverEnter(card));
+    card.addEventListener('mouseleave', ()=> productHoverLeave(card));
+    card.addEventListener('focus', ()=> productHoverEnter(card));
+    card.addEventListener('blur', ()=> productHoverLeave(card));
+
+  productsEl.appendChild(card);
+  });
+
+  // Animated entrance
+  anime.remove('.product');
+  anime({
+    targets: '.product',
+    opacity: [0,1],
+    translateY: [12,0],
+    delay: anime.stagger(60),
+    duration: 500,
+    easing: 'easeOutQuad'
+  });
+}
+
+/* ---- Cart logic ---- */
+const CART_KEY = 'mangalordium_cart_v1';
+const cartToggle = document.getElementById('cartToggle');
+const cartEl = document.getElementById('cart');
+const closeCart = document.getElementById('closeCart');
+const cartItemsEl = document.getElementById('cartItems');
+const cartTotalEl = document.getElementById('cartTotal');
+const cartCountEl = document.getElementById('cartCount');
+const checkoutBtn = document.getElementById('checkout');
+const cartSumEl = document.getElementById('cartSum');
+
+let cart = JSON.parse(localStorage.getItem(CART_KEY) || '{}');
+
+function saveCart(){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
+
+function getCartCount(){ return Object.values(cart).reduce((s,i)=>s+i.qty,0); }
+
+function updateCartUI(){
+  cartItemsEl.innerHTML = '';
+  const entries = Object.entries(cart);
+  if(entries.length === 0){ cartItemsEl.innerHTML = '<p class="muted">Кошик порожній</p>'; cartTotalEl.textContent = '0.00 ₴'; cartCountEl.textContent = '0'; return; }
+
+  let total = 0;
+  entries.forEach(([id, item])=>{
+    const row = document.createElement('div'); row.className = 'cart-item';
+    row.innerHTML = `
+      <img src="${item.img}" alt="${item.title}">
+      <div class="meta">
+        <h4>${item.title}</h4>
+        <p>${item.price.toFixed(2)} ₴</p>
+      </div>
+      <div class="qty-controls">
+        <button class="dec" data-id="${id}">−</button>
+        <div class="qty">${item.qty}</div>
+        <button class="inc" data-id="${id}">＋</button>
+      </div>
+    `;
+    cartItemsEl.appendChild(row);
+    total += item.price * item.qty;
+  });
+
+  cartTotalEl.textContent = total.toFixed(2) + ' ₴';
+  cartCountEl.textContent = getCartCount();
+  if(cartSumEl) cartSumEl.textContent = total.toFixed(2) + ' ₴';
+
+  // attach qty handlers
+  cartItemsEl.querySelectorAll('.inc').forEach(btn=> btn.addEventListener('click', ()=> changeQty(btn.dataset.id, 1)));
+  cartItemsEl.querySelectorAll('.dec').forEach(btn=> btn.addEventListener('click', ()=> changeQty(btn.dataset.id, -1)));
+}
+
+function changeQty(id, delta){
+  if(!cart[id]) return;
+  cart[id].qty += delta;
+  if(cart[id].qty <= 0) delete cart[id];
+  saveCart(); updateCartUI();
+}
+
+function addToCart(productId){
+  const p = productsData.find(x=> x.id == productId);
+  if(!p) return;
+  const key = String(p.id);
+  if(!cart[key]) cart[key] = { ...p, qty:0 };
+  cart[key].qty += 1;
+  saveCart();
+  updateCartUI();
+
+  // Small fly-to-cart animation
+  const img = document.querySelector(`.product .add-btn[data-id="${productId}"]`)?.closest('.product')?.querySelector('img');
+  if(img){
+    const clone = img.cloneNode();
+    const rect = img.getBoundingClientRect();
+    clone.style.position='fixed'; clone.style.left = rect.left+'px'; clone.style.top = rect.top+'px'; clone.style.width = rect.width+'px'; clone.style.zIndex = 120; document.body.appendChild(clone);
+    const target = cartToggle.getBoundingClientRect();
+    anime({ targets: clone, left: target.left, top: target.top, width: 30, height: 24, rotate: '1turn', opacity: [1,0.6,0], easing: 'easeInOutQuad', duration: 700, complete(){ clone.remove(); } });
+  }
+}
+
+cartToggle.addEventListener('click', ()=>{ cartEl.classList.toggle('open'); cartEl.setAttribute('aria-hidden', !cartEl.classList.contains('open')); });
+closeCart.addEventListener('click', ()=>{ cartEl.classList.remove('open'); cartEl.setAttribute('aria-hidden','true'); });
+
+// attach add to cart handlers globally (delegate)
+document.addEventListener('click', (e)=>{
+  const t = e.target;
+  if(t.matches('.add-btn')){ addToCart(t.dataset.id); }
+});
+
+// init
+updateCartUI();
+
+checkoutBtn.addEventListener('click', ()=>{
+  if(getCartCount() === 0) return;
+  alert('Оформлення замовлення (демо) — дякуємо!');
+  cart = {}; saveCart(); updateCartUI(); cartEl.classList.remove('open');
+});
+
+function productHoverEnter(el){
+  anime.remove(el);
+  anime({
+    targets: el,
+    scale: 1.03,
+    boxShadow: ['0 6px 10px rgba(0,0,0,0.12)','0 18px 40px rgba(0,0,0,0.45)'],
+    duration: 350,
+    easing: 'easeOutExpo'
+  });
+
+  // Accent color change on title (фіолет -> синій при світлій темі, і навпаки)
+  const title = el.querySelector('.accent');
+  if(title){
+    const isDark = document.body.classList.contains('theme-dark');
+    const from = isDark ? getComputedStyle(document.documentElement).getPropertyValue('--accent-dark').trim() : getComputedStyle(document.documentElement).getPropertyValue('--accent-light').trim();
+    const to = isDark ? getComputedStyle(document.documentElement).getPropertyValue('--accent-light').trim() : getComputedStyle(document.documentElement).getPropertyValue('--accent-dark').trim();
+    anime({
+      targets: title,
+      color: [from, to],
+      duration: 400,
+      easing: 'linear'
+    });
+  }
+}
+
+function productHoverLeave(el){
+  anime.remove(el);
+  anime({ targets: el, scale:1, boxShadow: '0 6px 18px rgba(0,0,0,0.12)', duration: 300, easing: 'easeOutExpo' });
+
+  const title = el.querySelector('.accent');
+  if(title){
+    const isDark = document.body.classList.contains('theme-dark');
+    const to = isDark ? getComputedStyle(document.documentElement).getPropertyValue('--accent-dark').trim() : getComputedStyle(document.documentElement).getPropertyValue('--accent-light').trim();
+    anime({ targets: title, color: to, duration: 300, easing: 'linear' });
+  }
+}
+
+// Пошук
+function filterProducts(query){
+  query = (query||'').toLowerCase().trim();
+  if(!query) return productsData;
+  return productsData.filter(p => (p.title+ ' ' + p.desc).toLowerCase().includes(query));
+}
+
+searchInput.addEventListener('input', (e)=>{
+  const val = e.target.value;
+  renderProducts(filterProducts(val));
+
+  // search field hover pulse animation
+  anime.remove('#search');
+  anime({ targets: '#search', scale: [1,1.01,1], duration: 400, easing: 'easeInOutSine' });
+});
+
+clearBtn.addEventListener('click', ()=>{ searchInput.value=''; searchInput.dispatchEvent(new Event('input')); searchInput.focus(); });
+
+// Theme toggle
+themeToggle.addEventListener('click', ()=>{
+  const isDark = document.body.classList.contains('theme-dark');
+  if(isDark){
+    // Переключаємо на світлу
+    document.body.classList.remove('theme-dark');
+    document.body.classList.add('theme-light');
+    themeToggle.textContent = 'Темний режим';
+    themeToggle.setAttribute('aria-pressed','true');
+  } else {
+    document.body.classList.remove('theme-light');
+    document.body.classList.add('theme-dark');
+    themeToggle.textContent = 'Світлий режим';
+    themeToggle.setAttribute('aria-pressed','false');
+  }
+
+  // Animate accent color swap globally
+  const root = document.documentElement;
+  const from = getComputedStyle(root).getPropertyValue('--accent-dark').trim();
+  const to = getComputedStyle(root).getPropertyValue('--accent-light').trim();
+
+  anime({
+    targets: document.querySelectorAll('.accent'),
+    color: [from, to],
+    duration: 550,
+    easing: 'easeInOutQuad'
+  });
+
+  // re-render to ensure colors applied
+  renderProducts(filterProducts(searchInput.value));
+});
+
+// Ініціалізація
+renderProducts(productsData);

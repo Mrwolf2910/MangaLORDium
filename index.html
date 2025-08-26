@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MangaLORDium — аніме магазин</title>
+    <!-- Шрифти, які дають «атмосферу» Зошита смерті і Моїєї геройської академії -->
+    <link href="https://fonts.googleapis.com/css2?family=Nosifer&family=Bangers&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body class="theme-dark">
+    <header class="site-header">
+      <div class="header-inner">
+        <h1 class="logo"><span class="logo-hero">Manga</span><span class="logo-dark">LORDium</span></h1>
+
+        <div class="controls">
+          <div class="search-wrap">
+            <input id="search" class="search" placeholder="Пошук аніме..." aria-label="Пошук аніме">
+            <button id="clearSearch" class="clear-btn" title="Очистити">✕</button>
+          </div>
+          <button id="themeToggle" class="theme-toggle" aria-pressed="false">Світлий режим</button>
+          <span id="cartSum" class="cart-sum">0.00 ₴</span>
+          <button id="cartToggle" class="cart-toggle" aria-label="Кошик">🛒 <span id="cartCount" class="cart-count">0</span></button>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+      <section class="hero">
+        <h2>Найкращі товари</h2>
+        <p>Акцент на продукції — швидкий пошук і приємні анімації.</p>
+      </section>
+
+      <section class="products" id="products" aria-live="polite"></section>
+    </main>
+
+    <aside id="cart" class="cart" aria-hidden="true">
+      <div class="cart-inner">
+        <header class="cart-header">
+          <h3>Кошик</h3>
+          <button id="closeCart" class="close-cart" aria-label="Закрити">✕</button>
+        </header>
+        <div id="cartItems" class="cart-items"></div>
+        <div class="cart-footer">
+          <div class="cart-total">Підсумок: <strong id="cartTotal">0.00 ₴</strong></div>
+          <button id="checkout" class="checkout-btn">Оформити</button>
+        </div>
+      </div>
+    </aside>
+
+    <footer class="site-footer">© MangaLORDium</footer>
+
+    <!-- anime.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
