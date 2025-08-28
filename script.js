@@ -145,6 +145,16 @@ updateCartUI();
 
 checkoutBtn.addEventListener('click', ()=>{
   if(getCartCount() === 0) return;
+  // Save order to orders list
+  try {
+    const ORDERS_KEY = 'mangalordium_orders_v1';
+    const items = Object.values(cart);
+    const total = items.reduce((s,i)=> s + i.price * i.qty, 0);
+    const prev = JSON.parse(localStorage.getItem(ORDERS_KEY) || '[]');
+    prev.push({ id: Date.now(), items, total, date: new Date().toISOString() });
+    localStorage.setItem(ORDERS_KEY, JSON.stringify(prev));
+  } catch (e) {}
+
   alert('Оформлення замовлення (демо) — дякуємо!');
   cart = {}; saveCart(); updateCartUI(); cartEl.classList.remove('open');
 });
