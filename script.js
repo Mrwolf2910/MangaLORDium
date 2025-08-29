@@ -200,7 +200,7 @@ closeCart.addEventListener('click', ()=>{ cartEl.classList.remove('open'); cartE
 // attach add to cart handlers globally (delegate)
 document.addEventListener('click', (e)=>{
   const t = e.target;
-  if(t.matches('.add-btn')){ addToCart(t.dataset.id); }
+  if(t.matches('.add-btn') || t.matches('.add-to-cart')){ addToCart(t.dataset.id || t.dataset.id); }
 });
 
 // init
@@ -233,6 +233,8 @@ checkoutBtn.addEventListener('click', ()=>{
   orderForm.style.display = '';
   orderSuccess.hidden = true;
   orderModal.removeAttribute('hidden');
+  // focus first input
+  const first = document.getElementById('orderName'); if(first) first.focus();
   orderModal.focus();
 });
 
