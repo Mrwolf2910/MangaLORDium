@@ -1,368 +1,157 @@
-
 <!doctype html>
 <html lang="uk">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MangaLORDium — аніме магазин</title>
-    <!-- Шрифти, які дають «атмосферу» Зошита смерті і Моїєї геройської академії -->
-    <link href="https://fonts.googleapis.com/css2?family=Nosifer&family=Bangers&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body class="theme-dark">
-    <header class="site-header">
-      <div class="header-inner">
-        <h1 class="logo"><span class="logo-hero">Manga</span><span class="logo-dark">LORDium</span></h1>
 
-        <div class="controls">
-          <div class="search-wrap">
-            <input id="search" class="search" placeholder="Пошук аніме..." aria-label="Пошук аніме">
-            <button id="clearSearch" class="clear-btn" title="Очистити">✕</button>
-          </div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MangaLORDium — аніме магазин</title>
+  <!-- Шрифти, які дають «атмосферу» Зошита смерті і Моїєї геройської академії -->
+  <link href="https://fonts.googleapis.com/css2?family=Nosifer&family=Bangers&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
 
-          <!-- Додано кнопки Кабінет і Перемикання теми -->
-          <button id="cabinetToggle" class="cabinet-toggle" aria-haspopup="true" aria-expanded="false">Кабінет</button>
-          <button id="themeToggle" class="theme-toggle" aria-pressed="false">Світлий режим</button>
-          <span id="cartSum" class="cart-sum">0.00 ₴</span>
-          <button id="cartToggle" class="cart-toggle" aria-label="Кошик">🛒 <span id="cartCount" class="cart-count">0</span></button>
+<body class="theme-dark">
+  <header class="site-header">
+    <div class="header-inner">
+      <h1 class="logo"><span class="logo-hero">Manga</span><span class="logo-dark">LORDium</span></h1>
+
+      <div class="controls">
+        <div class="search-wrap">
+          <input id="search" class="search" placeholder="Пошук аніме..." aria-label="Пошук аніме">
+          <button id="clearSearch" class="clear-btn" title="Очистити">✕</button>
         </div>
-      </div>
-    </header>
 
-    <main class="content">
-      <section class="hero">
-        <h2>Найкращі товари</h2>
-        <p>Акцент на продукції — швидкий пошук і приємні анімації.</p>
-        <div class="carousel-container">
-          <button class="carousel-button prev">❮</button>
-          <div class="carousel-track" id="featuredProducts">
-            <!-- Товари будуть додані через JavaScript -->
-          </div>
-          <button class="carousel-button next">❯</button>
-        </div>
-      </section>
-
-      <!-- Секція товарів: додано приклади карток манги -->
-      <section class="products" id="products" aria-live="polite">
-        <ul class="product-list">
-          <li class="product-card" data-id="m1" data-price="299.00">
-            <img src="https://placehold.co/150x220?text=Cover+1" alt="Обкладинка: Death Note — Зошит смерті" class="product-img">
-            <h3 class="product-title">Death Note — Зошит смерті</h3>
-            <p class="product-author">Автор: Цугумі Оба</p>
-            <div class="product-meta">
-              <span class="price">299.00 ₴</span>
-              <button class="add-to-cart" data-id="m1" data-price="299.00">Додати в кошик</button>
-            </div>
-          </li>
-
-          <li class="product-card" data-id="m2" data-price="249.00">
-            <img src="https://placehold.co/150x220?text=Cover+2" alt="Обкладинка: My Hero Academia — Моя геройська академія" class="product-img">
-            <h3 class="product-title">My Hero Academia — Моя геройська академія</h3>
-            <p class="product-author">Автор: Кōхей Хорікоші</p>
-            <div class="product-meta">
-              <span class="price">249.00 ₴</span>
-              <button class="add-to-cart" data-id="m2" data-price="249.00">Додати в кошик</button>
-            </div>
-          </li>
-
-          <li class="product-card" data-id="m3" data-price="199.00">
-            <img src="https://placehold.co/150x220?text=Cover+3" alt="Обкладинка: One Piece — Одна частина" class="product-img">
-            <h3 class="product-title">One Piece — Одна частина</h3>
-            <p class="product-author">Автор: Ейічіро Ода</p>
-            <div class="product-meta">
-              <span class="price">199.00 ₴</span>
-              <button class="add-to-cart" data-id="m3" data-price="199.00">Додати в кошик</button>
-            </div>
-          </li>
-
-          <li class="product-card" data-id="m4" data-price="179.00">
-            <img src="https://placehold.co/150x220?text=Cover+4" alt="Обкладинка: Naruto — Наруто" class="product-img">
-            <h3 class="product-title">Naruto — Наруто</h3>
-            <p class="product-author">Автор: Масаші Кішимото</p>
-            <div class="product-meta">
-              <span class="price">179.00 ₴</span>
-              <button class="add-to-cart" data-id="m4" data-price="179.00">Додати в кошик</button>
-            </div>
-          </li>
-
-          <li class="product-card" data-id="m5" data-price="159.00">
-            <img src="https://placehold.co/150x220?text=Cover+5" alt="Обкладинка: Demon Slayer — Убивця демонів" class="product-img">
-            <h3 class="product-title">Demon Slayer — Убивця демонів</h3>
-            <p class="product-author">Автор: Койохару Готоге</p>
-            <div class="product-meta">
-              <span class="price">159.00 ₴</span>
-              <button class="add-to-cart" data-id="m5" data-price="159.00">Додати в кошик</button>
-            </div>
-          </li>
-
-          <li class="product-card" data-id="m6" data-price="129.00">
-            <img src="https://placehold.co/150x220?text=Cover+6" alt="Обкладинка: Fullmetal Alchemist — Сталевий алхімік" class="product-img">
-            <h3 class="product-title">Fullmetal Alchemist — Сталевий алхімік</h3>
-            <p class="product-author">Автори: Хіроюкі Аракава</p>
-            <div class="product-meta">
-              <span class="price">129.00 ₴</span>
-              <button class="add-to-cart" data-id="m6" data-price="129.00">Додати в кошик</button>
-            </div>
-          </li>
-        </ul>
-      </section>
-
-      <!-- Цікаві факти про аніме і Японію -->
-      <section class="facts" id="facts">
-        <h2>Цікаві факти про аніме та Японію</h2>
-        <ul class="facts-list">
-          <li>Аніме має корені в японській анімації початку XX століття, але вибух популярності стався в 1980–1990-х.</li>
-          <li>В Японії існують кафе з тематикою аніме, де офіціанти одягаються як персонажі.</li>
-          <li>Манга перекладається на десятки мов і часто виходить раніше за аніме-адаптацію.</li>
-          <li>В Японії існує традиція «оміяге» — дарувати сувеніри після подорожі.</li>
-          <li>Термін «сейюн» (声優) означає професійних акторів озвучення — вони дуже популярні серед фанатів.</li>
-        </ul>
-      </section>
-    </main>
-
-    <!-- Кошик -->
-    <aside id="cart" class="cart" aria-hidden="true">
-      <div class="cart-inner">
-        <header class="cart-header">
-          <h3>Кошик</h3>
-          <button id="closeCart" class="close-cart" aria-label="Закрити">✕</button>
-        </header>
-        <div id="cartItems" class="cart-items"></div>
-        <div class="cart-footer">
-          <div class="cart-total">Підсумок: <strong id="cartTotal">0.00 ₴</strong></div>
-          <button id="checkout" class="checkout-btn">Оформити</button>
-        </div>
-      </div>
-    </aside>
-
-    <!-- Кабінет користувача (модаль) -->
-    <aside id="cabinet" class="cabinet" aria-hidden="true">
-      <div class="cabinet-inner">
-        <header class="cabinet-header">
-          <h3>Кабінет</h3>
-          <button id="closeCabinet" class="close-cabinet" aria-label="Закрити">✕</button>
-        </header>
-
-        <div id="cabinetContent" class="cabinet-content">
-          <section class="profile-summary" aria-live="polite">
-            <h4>Вхід / Профіль</h4>
-            <form id="loginForm" class="login-form" aria-label="Форма входу">
-              <label for="email">Електронна пошта</label>
-              <input id="email" type="email" placeholder="you@example.com" required>
-              <label for="password">Пароль</label>
-              <input id="password" type="password" placeholder="••••••" required>
-              <div class="form-actions">
-                <button type="submit" id="loginBtn">Увійти</button>
-                <button type="button" id="guestBtn">Продовжити як гість</button>
-              </div>
-            </form>
-
-            <div id="profilePanel" class="profile-panel" hidden>
-              <p>Вітаємо, <strong id="profileName">Користувач</strong></p>
-              <p>Email: <span id="profileEmail">user@example.com</span></p>
-              <button id="logoutBtn">Вийти</button>
-            </div>
-          </section>
-        </div>
-      </div>
-    </aside>
-
-    <!-- Модаль підтвердження замовлення -->
-    <div id="orderModal" class="order-modal" role="dialog" aria-modal="true" aria-hidden="true" hidden>
-      <div class="order-modal-inner">
-        <button id="closeOrderModal" class="close-order" aria-label="Закрити">✕</button>
-        <h3 id="orderModalTitle">Дякуємо за замовлення!</h3>
-        <p id="orderModalMessage">Наш менеджер зв'яжеться з вами найближчим часом.</p>
-        <h4>Цікаві факти поки чекаєте:</h4>
-        <ul id="orderFacts" class="order-facts"></ul>
+        <!-- Додано кнопку перемикання теми -->
+        <button id="themeToggle" class="theme-toggle" aria-pressed="false">Світлий режим</button>
+        <span id="cartSum" class="cart-sum">0.00 ₴</span>
+        <button id="cartToggle" class="cart-toggle" aria-label="Кошик">🛒 <span id="cartCount"
+            class="cart-count">0</span></button>
       </div>
     </div>
+  </header>
 
-    <footer class="site-footer">© MangaLORDium</footer>
+  <main class="content">
+    <section class="hero">
+      <h2>Найкращі товари</h2>
+      <p>Акцент на продукції — швидкий пошук і приємні анімації.</p>
+      <div class="carousel-container">
+        <button class="carousel-button prev">❮</button>
+        <div class="carousel-track" id="featuredProducts">
+          <!-- Товари будуть додані через JavaScript -->
+        </div>
+        <button class="carousel-button next">❯</button>
+      </div>
+    </section>
 
-    <!-- anime.js CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    <script src="script.js"></script>
+    <!-- Секція товарів: додано приклади карток манги -->
+    <section class="products" id="products" aria-live="polite">
+      <ul class="product-list">
+        <li class="product-card" data-id="m1" data-price="299.00">
+          <img src="https://placehold.co/150x220?text=Cover+1" alt="Обкладинка: Death Note — Зошит смерті"
+            class="product-img">
+          <h3 class="product-title">Death Note — Зошит смерті</h3>
+          <p class="product-author">Автор: Цугумі Оба</p>
+          <div class="product-meta">
+            <span class="price">299.00 ₴</span>
+            <button class="add-to-cart" data-id="m1" data-price="299.00">Додати в кошик</button>
+          </div>
+        </li>
 
-    <script>
-      (function () {
-        // Елементи
-        const cartToggle = document.getElementById('cartToggle');
-        const cart = document.getElementById('cart');
-        const closeCart = document.getElementById('closeCart');
-        const cartItemsEl = document.getElementById('cartItems');
-        const cartTotalEl = document.getElementById('cartTotal');
-        const cartCountEl = document.getElementById('cartCount');
-        const cartSumEl = document.getElementById('cartSum');
-        const checkoutBtn = document.getElementById('checkout');
+        <li class="product-card" data-id="m2" data-price="249.00">
+          <img src="https://placehold.co/150x220?text=Cover+2"
+            alt="Обкладинка: My Hero Academia — Моя геройська академія" class="product-img">
+          <h3 class="product-title">My Hero Academia — Моя геройська академія</h3>
+          <p class="product-author">Автор: Кōхей Хорікоші</p>
+          <div class="product-meta">
+            <span class="price">249.00 ₴</span>
+            <button class="add-to-cart" data-id="m2" data-price="249.00">Додати в кошик</button>
+          </div>
+        </li>
 
-        const cabinetToggle = document.getElementById('cabinetToggle');
-        const cabinet = document.getElementById('cabinet');
-        const closeCabinet = document.getElementById('closeCabinet');
+        <li class="product-card" data-id="m3" data-price="199.00">
+          <img src="https://placehold.co/150x220?text=Cover+3" alt="Обкладинка: One Piece — Одна частина"
+            class="product-img">
+          <h3 class="product-title">One Piece — Одна частина</h3>
+          <p class="product-author">Автор: Ейічіро Ода</p>
+          <div class="product-meta">
+            <span class="price">199.00 ₴</span>
+            <button class="add-to-cart" data-id="m3" data-price="199.00">Додати в кошик</button>
+          </div>
+        </li>
 
-        const orderModal = document.getElementById('orderModal');
-        const orderFacts = document.getElementById('orderFacts');
-        const closeOrderModal = document.getElementById('closeOrderModal');
+        <li class="product-card" data-id="m4" data-price="179.00">
+          <img src="https://placehold.co/150x220?text=Cover+4" alt="Обкладинка: Naruto — Наруто" class="product-img">
+          <h3 class="product-title">Naruto — Наруто</h3>
+          <p class="product-author">Автор: Масаші Кішимото</p>
+          <div class="product-meta">
+            <span class="price">179.00 ₴</span>
+            <button class="add-to-cart" data-id="m4" data-price="179.00">Додати в кошик</button>
+          </div>
+        </li>
 
-        const facts = [
-          "Аніме — це скорочення від англійського 'animation', але в Японії воно означає будь-яку анімацію.",
-          "Манга читається справа наліво в оригіналі, й це часто зберігають при перекладі для колекційних видань.",
-          "У Токіо є музей Ghibli, присвячений студії, яка подарувала світу 'Мій сусід Тоторо' та 'Віднесені привидами'.",
-          "В Японії аніме та манга охоплюють тисячі жанрів — від повсякденних драм до наукової фантастики і спорту.",
-          "Справжні фанати часто збирають артбуки, драматичні CD і обмежені видання манги.",
-        ];
+        <li class="product-card" data-id="m5" data-price="159.00">
+          <img src="https://placehold.co/150x220?text=Cover+5" alt="Обкладинка: Demon Slayer — Убивця демонів"
+            class="product-img">
+          <h3 class="product-title">Demon Slayer — Убивця демонів</h3>
+          <p class="product-author">Автор: Койохару Готоге</p>
+          <div class="product-meta">
+            <span class="price">159.00 ₴</span>
+            <button class="add-to-cart" data-id="m5" data-price="159.00">Додати в кошик</button>
+          </div>
+        </li>
 
-        // Стан кошика
-        let cartState = {}; // id -> {id,title,price,qty}
+        <li class="product-card" data-id="m6" data-price="129.00">
+          <img src="https://placehold.co/150x220?text=Cover+6" alt="Обкладинка: Fullmetal Alchemist — Сталевий алхімік"
+            class="product-img">
+          <h3 class="product-title">Fullmetal Alchemist — Сталевий алхімік</h3>
+          <p class="product-author">Автори: Хіроюкі Аракава</p>
+          <div class="product-meta">
+            <span class="price">129.00 ₴</span>
+            <button class="add-to-cart" data-id="m6" data-price="129.00">Додати в кошик</button>
+          </div>
+        </li>
+      </ul>
+    </section>
 
-        function formatPrice(v) { return Number(v).toFixed(2) + ' ₴'; }
+    <!-- Цікаві факти про аніме і Японію -->
+    <section class="facts" id="facts">
+      <h2>Цікаві факти про аніме та Японію</h2>
+      <ul class="facts-list">
+        <li>Аніме має корені в японській анімації початку XX століття, але вибух популярності стався в 1980–1990-х.</li>
+        <li>В Японії існують кафе з тематикою аніме, де офіціанти одягаються як персонажі.</li>
+        <li>Манга перекладається на десятки мов і часто виходить раніше за аніме-адаптацію.</li>
+        <li>В Японії існує традиція «оміяге» — дарувати сувеніри після подорожі.</li>
+        <li>Термін «сейюн» (声優) означає професійних акторів озвучення — вони дуже популярні серед фанатів.</li>
+      </ul>
+    </section>
+  </main>
 
-        function updateCartUI() {
-          const items = Object.values(cartState);
-          cartItemsEl.innerHTML = items.length
-            ? items.map(i => `
-                <div class="cart-item" data-id="${i.id}">
-                  <div class="cart-item-info">
-                    <strong>${i.title}</strong>
-                    <div>${formatPrice(i.price)} × ${i.qty}</div>
-                  </div>
-                  <div class="cart-item-actions">
-                    <button class="decrease" data-id="${i.id}">−</button>
-                    <button class="increase" data-id="${i.id}">+</button>
-                    <button class="remove" data-id="${i.id}">×</button>
-                  </div>
-                </div>
-              `).join('')
-            : '<div class="empty">Кошик порожній</div>';
+  <!-- Кошик -->
+  <aside id="cart" class="cart" aria-hidden="true">
+    <div class="cart-inner">
+      <header class="cart-header">
+        <h3>Кошик</h3>
+        <button id="closeCart" class="close-cart" aria-label="Закрити">✕</button>
+      </header>
+      <div id="cartItems" class="cart-items"></div>
+      <div class="cart-footer">
+        <div class="cart-total">Підсумок: <strong id="cartTotal">0.00 ₴</strong></div>
+          <div class="cart-buttons">
+            <button id="checkout" class="checkout-btn">Оформити</button>
+          </div>
+      </div>
+    </div>
+  </aside>
 
-          const total = items.reduce((s, it) => s + it.price * it.qty, 0);
-          const count = items.reduce((s, it) => s + it.qty, 0);
-          cartTotalEl.textContent = formatPrice(total);
-          cartSumEl.textContent = formatPrice(total);
-          cartCountEl.textContent = count;
-        }
 
-        function addToCart(id, title, price) {
-          if (!cartState[id]) cartState[id] = { id, title, price: Number(price), qty: 0 };
-          cartState[id].qty += 1;
-          updateCartUI();
-        }
 
-        document.addEventListener('click', (e) => {
-          const add = e.target.closest('.add-to-cart');
-          if (add) {
-            const id = add.dataset.id;
-            const price = add.dataset.price;
-            const card = document.querySelector(`.product-card[data-id="${id}"]`);
-            const title = card?.querySelector('.product-title')?.textContent || 'Товар';
-            addToCart(id, title, price);
-            return;
-          }
+  <footer class="site-footer">© MangaLORDium</footer>
 
-          if (e.target.matches('.remove')) {
-            const id = e.target.dataset.id;
-            delete cartState[id];
-            updateCartUI();
-            return;
-          }
-          if (e.target.matches('.increase')) {
-            const id = e.target.dataset.id;
-            if (cartState[id]) cartState[id].qty += 1;
-            updateCartUI();
-            return;
-          }
-          if (e.target.matches('.decrease')) {
-            const id = e.target.dataset.id;
-            if (cartState[id]) {
-              cartState[id].qty = Math.max(0, cartState[id].qty - 1);
-              if (cartState[id].qty === 0) delete cartState[id];
-            }
-            updateCartUI();
-            return;
-          }
-        });
+  <!-- anime.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script src="script.js"></script>
 
-        // Кошик
-        cartToggle && cartToggle.addEventListener('click', () => {
-          const hidden = cart.getAttribute('aria-hidden') === 'true';
-          cart.setAttribute('aria-hidden', String(!hidden));
-        });
-        closeCart && closeCart.addEventListener('click', () => cart.setAttribute('aria-hidden', 'true'));
+  <!-- Inline cart script removed; keeping single cart implementation in script.js -->
+</body>
 
-        // Кабінет
-        cabinetToggle && cabinetToggle.addEventListener('click', () => {
-          const hidden = cabinet.getAttribute('aria-hidden') === 'true';
-          cabinet.setAttribute('aria-hidden', String(!hidden));
-          cabinetToggle.setAttribute('aria-expanded', String(!hidden));
-        });
-        closeCabinet && closeCabinet.addEventListener('click', () => {
-          cabinet.setAttribute('aria-hidden', 'true');
-          cabinetToggle && cabinetToggle.setAttribute('aria-expanded', 'false');
-        });
-
-        // Логіка оформлення
-        checkoutBtn && checkoutBtn.addEventListener('click', () => {
-          const items = Object.values(cartState);
-          if (!items.length) {
-            // коротке повідомлення при порожньому кошику
-            alert('Кошик порожній — додайте товари перед оформленням.');
-            return;
-          }
-
-          // Показати модаль з повідомленням і випадковими фактами
-          orderFacts.innerHTML = '';
-          // виберемо 3 випадкових факти
-          const shuffled = facts.slice().sort(() => Math.random() - 0.5).slice(0, 3);
-          shuffled.forEach(f => {
-            const li = document.createElement('li');
-            li.textContent = f;
-            orderFacts.appendChild(li);
-          });
-
-          orderModal.hidden = false;
-          orderModal.setAttribute('aria-hidden', 'false');
-
-          // Очищуємо кошик (імітація оформлення)
-          cartState = {};
-          updateCartUI();
-        });
-
-        closeOrderModal && closeOrderModal.addEventListener('click', () => {
-          orderModal.hidden = true;
-          orderModal.setAttribute('aria-hidden', 'true');
-        });
-
-        // Кабінет: простий локальний вхід
-        const loginForm = document.getElementById('loginForm');
-        const guestBtn = document.getElementById('guestBtn');
-        const profilePanel = document.getElementById('profilePanel');
-        const profileName = document.getElementById('profileName');
-        const profileEmail = document.getElementById('profileEmail');
-        const logoutBtn = document.getElementById('logoutBtn');
-
-        loginForm && loginForm.addEventListener('submit', (e) => {
-          e.preventDefault();
-          const email = document.getElementById('email').value.trim();
-          profileName.textContent = email.split('@')[0] || 'Користувач';
-          profileEmail.textContent = email || '—';
-          loginForm.hidden = true;
-          profilePanel.hidden = false;
-        });
-        guestBtn && guestBtn.addEventListener('click', () => {
-          profileName.textContent = 'Гість';
-          profileEmail.textContent = '—';
-          loginForm.hidden = true;
-          profilePanel.hidden = false;
-        });
-        logoutBtn && logoutBtn.addEventListener('click', () => {
-          loginForm.hidden = false;
-          profilePanel.hidden = true;
-          loginForm.reset();
-        });
-
-        // Ініціалізація
-        updateCartUI();
-      })();
-    </script>
-  </body>
 </html>

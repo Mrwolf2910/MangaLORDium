@@ -604,5 +604,23 @@ body.theme-light .add-to-cart { background:var(--accent-light); color:#01303a; }
     gap: 8px;
 }
 
+/* Стилі для кнопок кошика */
+.cart-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.checkout-btn {
+    background: var(--accent-dark);
+    color: white;
+    flex: 2;
+    transition: all 0.3s;
+}
+
+.checkout-btn:hover {
+    background: var(--accent-light);
+}
+
 /* Ensure icon-like cart count still fits */
 .cart-count { font-weight:700; }
