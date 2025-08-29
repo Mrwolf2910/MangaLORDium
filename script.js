@@ -4,13 +4,76 @@ const productsData = [
   { id:2, title: 'Моя геройська академія: Плакат', desc: 'Плакат All Might', img: 'https://picsum.photos/seed/mha/400/300', price: 249.50 },
   { id:3, title: 'Зошит смерті: Рюкзак', desc: 'Стильний рюкзак Death Note', img: 'https://picsum.photos/seed/dn/400/300', price: 1299.00 },
   { id:4, title: 'One Piece: Кепка', desc: 'Кепка з мотивами One Piece', img: 'https://picsum.photos/seed/op/400/300', price: 199.99 },
-  { id:5, title: 'Demon Slayer: Фігурка', desc: 'Колекційна фігурка Tanjiro', img: 'https://picsum.photos/seed/ds/400/300', price: 749.00 }
+  { id:5, title: 'Demon Slayer: Фігурка', desc: 'Колекційна фігурка Tanjiro', img: 'https://picsum.photos/seed/ds/400/300', price: 749.00 },
+  { id:6, title: 'Attack on Titan: Манга', desc: 'Том 1 манги Attack on Titan', img: 'https://picsum.photos/seed/aot/400/300', price: 399.00 },
+  { id:7, title: 'Jujutsu Kaisen: Брелок', desc: 'Брелок із Годжо Сатору', img: 'https://picsum.photos/seed/jjk/400/300', price: 149.99 },
+  { id:8, title: 'Dragon Ball: Футболка', desc: 'Футболка з принтом Гоку', img: 'https://picsum.photos/seed/db/400/300', price: 549.00 },
+  { id:9, title: 'Tokyo Ghoul: Маска', desc: 'Косплей маска Канекі Кена', img: 'https://picsum.photos/seed/tg/400/300', price: 299.99 },
+  { id:10, title: 'Fullmetal Alchemist: Кулон', desc: 'Кулон з символом Уробороса', img: 'https://picsum.photos/seed/fma/400/300', price: 199.50 },
+  { id:11, title: 'Evangelion: Модель EVA-01', desc: 'Колекційна модель робота EVA-01', img: 'https://picsum.photos/seed/eva/400/300', price: 1499.99 },
+  { id:12, title: 'Hunter x Hunter: Значок', desc: 'Значок мисливця', img: 'https://picsum.photos/seed/hxh/400/300', price: 179.99 },
+  { id:13, title: 'Sailor Moon: Намисто', desc: 'Репліка кристалу Срібного Місяця', img: 'https://picsum.photos/seed/sm/400/300', price: 449.00 },
+  { id:14, title: 'Black Clover: Книга', desc: 'Гримуар з чорною конюшиною', img: 'https://picsum.photos/seed/bc/400/300', price: 599.00 },
+  { id:15, title: 'Sword Art Online: Меч', desc: 'Репліка меча Кіріто', img: 'https://picsum.photos/seed/sao/400/300', price: 899.99 }
 ];
 
 const productsEl = document.getElementById('products');
 const searchInput = document.getElementById('search');
 const clearBtn = document.getElementById('clearSearch');
 const themeToggle = document.getElementById('themeToggle');
+
+// Карусель з найкращими товарами
+const featuredProducts = [
+  productsData[10], // Evangelion
+  productsData[2],  // Death Note
+  productsData[4],  // Demon Slayer
+  productsData[6],  // Jujutsu Kaisen
+  productsData[14]  // Sword Art Online
+];
+
+const carouselTrack = document.getElementById('featuredProducts');
+const prevButton = document.querySelector('.carousel-button.prev');
+const nextButton = document.querySelector('.carousel-button.next');
+let currentIndex = 0;
+
+function renderCarousel() {
+  carouselTrack.innerHTML = '';
+  featuredProducts.forEach((product, index) => {
+    const item = document.createElement('div');
+    item.className = 'carousel-item';
+    item.innerHTML = `
+      <img src="${product.img}" alt="${product.title}">
+      <h3>${product.title}</h3>
+      <p class="price">${product.price.toFixed(2)} ₴</p>
+      <button class="add-btn" data-id="${product.id}">Додати в кошик</button>
+    `;
+    carouselTrack.appendChild(item);
+  });
+  updateCarousel();
+}
+
+function updateCarousel() {
+  const itemWidth = carouselTrack.offsetWidth / 3; // Показуємо по 3 товари
+  carouselTrack.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+}
+
+if (prevButton && nextButton && carouselTrack) {
+  prevButton.addEventListener('click', () => {
+    currentIndex = Math.max(currentIndex - 1, 0);
+    updateCarousel();
+  });
+
+  nextButton.addEventListener('click', () => {
+    currentIndex = Math.min(currentIndex + 1, featuredProducts.length - 3);
+    updateCarousel();
+  });
+
+  // Ініціалізація каруселі
+  renderCarousel();
+  
+  // Оновлення каруселі при зміні розміру вікна
+  window.addEventListener('resize', updateCarousel);
+}
 
 function renderProducts(list){
   productsEl.innerHTML = '';

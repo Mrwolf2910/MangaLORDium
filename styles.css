@@ -48,6 +48,174 @@ body.theme-light .site-header {
 .logo {
     margin: 0;
     font-family: 'Bangers', sans-serif;
+}
+
+/* Стилі для каруселі */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    margin: 20px auto;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 20px 0;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.carousel-item {
+    min-width: calc(33.333% - 40px);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    backdrop-filter: blur(5px);
+    transition: transform 0.3s;
+}
+
+.carousel-item:hover {
+    transform: translateY(-5px);
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.carousel-item h3 {
+    font-size: 1.1em;
+    margin: 10px 0;
+    color: var(--accent-dark);
+}
+
+.carousel-item .price {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--text-dark);
+    margin: 10px 0;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--accent-dark);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 50%;
+    opacity: 0.7;
+    transition: all 0.3s;
+    z-index: 1;
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-button:hover {
+    opacity: 1;
+    background: var(--accent-light);
+}
+
+.carousel-button.prev {
+    left: 10px;
+}
+
+.carousel-button.next {
+    right: 10px;
+}
+}
+
+/* Стилі для каруселі */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    margin: 20px auto;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 20px 0;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.carousel-item {
+    min-width: calc(33.333% - 40px);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    backdrop-filter: blur(5px);
+    transition: transform 0.3s;
+}
+
+.carousel-item:hover {
+    transform: translateY(-5px);
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.carousel-item h3 {
+    font-size: 1.1em;
+    margin: 10px 0;
+    color: var(--accent-dark);
+}
+
+.carousel-item .price {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--text-dark);
+    margin: 10px 0;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--accent-dark);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 50%;
+    opacity: 0.7;
+    transition: all 0.3s;
+    z-index: 1;
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-button:hover {
+    opacity: 1;
+    background: var(--accent-light);
+}
     font-size: 28px;
 }
 
