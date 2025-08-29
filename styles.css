@@ -578,6 +578,25 @@ body.theme-light .order-modal-inner { background:#fff; color:#0b0b0b; }
 .order-modal .close-order { position:absolute; right:18px; top:18px; border:none; background:transparent; color:var(--muted); cursor:pointer; }
 .order-facts { margin-top:8px; }
 
+/* Order form styles */
+.order-modal-inner form { display:block; max-width:640px; }
+.form-row { margin-bottom:10px; }
+.form-row label { display:block; font-size:13px; color:var(--muted); }
+.form-row input[type="text"], .form-row input[type="email"], .form-row input[type="tel"], .form-row select {
+        width:100%; padding:8px 10px; border-radius:8px; border:1px solid rgba(255,255,255,0.06); background:transparent; color:inherit; box-sizing:border-box;
+}
+body.theme-light .form-row input[type="text"], body.theme-light .form-row input[type="email"], body.theme-light .form-row input[type="tel"], body.theme-light .form-row select { border-color: rgba(3,48,68,0.06); background:#fff; color:#0b0b0b; }
+
+.order-summary { font-size:14px; color:var(--text-dark); }
+.order-modal-inner #orderSuccess { text-align:center; }
+.order-modal-inner #orderSuccess h4 { margin-top:0; }
+.order-modal-inner .checkout-btn { margin-right:8px; }
+
+@media (max-width:600px) {
+    .order-modal-inner { padding:14px; }
+    .order-modal-inner form { max-width:100%; }
+}
+
 /* Unified product card styles (for static cards) */
 .product-list { display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:16px; list-style:none; padding:0; margin:0; }
 .product-card { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.04)); border-radius:12px; padding:12px; display:flex; flex-direction:column; gap:8px; }

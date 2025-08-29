@@ -143,15 +143,63 @@
     </div>
   </aside>
 
+  <!-- Order modal -->
+  <div class="order-modal" id="orderModal" hidden>
+    <div class="order-modal-inner" role="dialog" aria-modal="true" aria-labelledby="orderTitle">
+      <button class="close-order" id="closeOrder" aria-label="Закрити">✕</button>
+      <h3 id="orderTitle">Оформлення замовлення</h3>
+      <form id="orderForm" novalidate>
+        <div class="form-row">
+          <label>ПІБ<br><input type="text" id="orderName" name="name" required></label>
+        </div>
+        <div class="form-row">
+          <label>Електронна пошта<br><input type="email" id="orderEmail" name="email" required></label>
+        </div>
+        <div class="form-row">
+          <label>Телефон<br><input type="tel" id="orderPhone" name="phone" required></label>
+        </div>
+        <div class="form-row">
+          <label>Адреса доставки<br><input type="text" id="orderAddress" name="address" required></label>
+        </div>
+        <div class="form-row">
+          <label>Місто<br><input type="text" id="orderCity" name="city" required></label>
+        </div>
+        <div class="form-row">
+          <label>Поштовий індекс<br><input type="text" id="orderPostal" name="postal" required></label>
+        </div>
+        <div class="form-row">
+          <label>Оплата<br>
+            <select id="orderPayment" name="payment" required>
+              <option value="">Оберіть метод</option>
+              <option value="card">Картка</option>
+              <option value="cod">Оплата при доставці</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="order-summary" id="orderSummary" aria-live="polite" style="margin-top:12px;"></div>
+
+        <div style="display:flex; gap:10px; margin-top:12px;">
+          <button type="submit" class="checkout-btn">Підтвердити замовлення</button>
+          <button type="button" class="btn" id="cancelOrder">Скасувати</button>
+        </div>
+      </form>
+
+      <div id="orderSuccess" hidden>
+        <h4>Дякуємо! Замовлення прийнято.</h4>
+        <p id="orderSuccessText"></p>
+        <button id="closeSuccess" class="btn">Закрити</button>
+      </div>
+    </div>
+  </div>
+
 
 
   <footer class="site-footer">© MangaLORDium</footer>
-
-  <!-- anime.js CDN -->
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
   <script src="script.js"></script>
 
-  <!-- Inline cart script removed; keeping single cart implementation in script.js -->
 </body>
 
 </html>

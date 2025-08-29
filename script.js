@@ -206,13 +206,80 @@ document.addEventListener('click', (e)=>{
 // init
 updateCartUI();
 
+// --- Оформлення замовлення через модальну форму ---
+const orderModal = document.getElementById('orderModal');
+const orderForm = document.getElementById('orderForm');
+const closeOrder = document.getElementById('closeOrder');
+const cancelOrder = document.getElementById('cancelOrder');
+const orderSummary = document.getElementById('orderSummary');
+const orderSuccess = document.getElementById('orderSuccess');
+const orderSuccessText = document.getElementById('orderSuccessText');
+const closeSuccess = document.getElementById('closeSuccess');
+
+function buildOrderSummary(){
+  const entries = Object.values(cart);
+  if(entries.length === 0) return 'Кошик порожній';
+  let html = '<ul style="padding-left:18px; margin:0;">';
+  let total = 0;
+  entries.forEach(it => { html += `<li>${it.title} × ${it.qty} — ${(it.price*it.qty).toFixed(2)} ₴</li>`; total += it.price*it.qty; });
+  html += `</ul><div style="margin-top:8px;font-weight:700;">Підсумок: ${total.toFixed(2)} ₴</div>`;
+  return html;
+}
+
 checkoutBtn.addEventListener('click', ()=>{
   if(getCartCount() === 0) return;
-  // Очищення кошика
-
-  alert('Оформлення замовлення (демо) — дякуємо!');
-  cart = {}; saveCart(); updateCartUI(); cartEl.classList.remove('open');
+  // Показати модаль
+  orderSummary.innerHTML = buildOrderSummary();
+  orderForm.style.display = '';
+  orderSuccess.hidden = true;
+  orderModal.removeAttribute('hidden');
+  orderModal.focus();
 });
+
+function closeOrderModal(){ orderModal.setAttribute('hidden',''); }
+
+closeOrder.addEventListener('click', closeOrderModal);
+cancelOrder.addEventListener('click', closeOrderModal);
+
+orderForm.addEventListener('submit', (e)=>{
+  e.preventDefault();
+  // Простий HTML5 валідаційний контроль
+  if(!orderForm.checkValidity()){
+    orderForm.reportValidity();
+    return;
+  }
+
+  // Зібрати дані форми
+  const data = {
+    id: 'ord_' + Date.now(),
+    name: document.getElementById('orderName').value.trim(),
+    email: document.getElementById('orderEmail').value.trim(),
+    phone: document.getElementById('orderPhone').value.trim(),
+    address: document.getElementById('orderAddress').value.trim(),
+    city: document.getElementById('orderCity').value.trim(),
+    postal: document.getElementById('orderPostal').value.trim(),
+    payment: document.getElementById('orderPayment').value,
+    items: Object.values(cart).map(i=> ({ id:i.id, title:i.title, qty:i.qty, price:i.price })),
+    total: Object.values(cart).reduce((s,i)=> s + i.price*i.qty, 0),
+    created: new Date().toISOString()
+  };
+
+  // Зберегти замовлення в localStorage під ключем orders
+  const ORDERS_KEY = 'mangalordium_orders_v1';
+  const prev = JSON.parse(localStorage.getItem(ORDERS_KEY) || '[]');
+  prev.push(data);
+  localStorage.setItem(ORDERS_KEY, JSON.stringify(prev));
+
+  // Показати повідомлення про успіх і очистити кошик
+  orderForm.style.display = 'none';
+  orderSuccessText.textContent = `Номер замовлення: ${data.id}. Ми надіслали підтвердження на ${data.email || 'вказану пошту'}.`;
+  orderSuccess.hidden = false;
+
+  cart = {}; saveCart(); updateCartUI();
+  // Не закриваємо модаль автоматично — даємо побачити номер.
+});
+
+closeSuccess.addEventListener('click', ()=>{ closeOrderModal(); });
 
 function productHoverEnter(el){
   anime.remove(el);
