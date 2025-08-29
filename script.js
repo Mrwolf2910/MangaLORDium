@@ -1,57 +1,74 @@
-// Дані прикладів товарів
+// Розширений список товарів (id як рядки, підтримка uk/en назви)
 const productsData = [
-  { id:1, title: 'Наруто: Фігурка', desc: 'Колекційна фігурка Наруто', img: 'https://picsum.photos/seed/naru/400/300', price: 899.00 },
-  { id:2, title: 'Моя геройська академія: Плакат', desc: 'Плакат All Might', img: 'https://picsum.photos/seed/mha/400/300', price: 249.50 },
-  { id:3, title: 'Зошит смерті: Рюкзак', desc: 'Стильний рюкзак Death Note', img: 'https://picsum.photos/seed/dn/400/300', price: 1299.00 },
-  { id:4, title: 'One Piece: Кепка', desc: 'Кепка з мотивами One Piece', img: 'https://picsum.photos/seed/op/400/300', price: 199.99 },
-  { id:5, title: 'Demon Slayer: Фігурка', desc: 'Колекційна фігурка Tanjiro', img: 'https://picsum.photos/seed/ds/400/300', price: 749.00 }
+  { id: 'm1', titleUk: 'Death Note — Зошит смерті', titleEn: 'Death Note', desc: 'Колекційний щоденник', img: 'https://placehold.co/300x420?text=Death+Note', price: 299.00 },
+  { id: 'm2', titleUk: 'My Hero Academia — Моя геройська академія', titleEn: 'My Hero Academia', desc: 'Плакат All Might', img: 'https://placehold.co/300x420?text=My+Hero+Academia', price: 249.00 },
+  { id: 'm3', titleUk: 'One Piece — Одна частина', titleEn: 'One Piece', desc: 'Кепка Luffy', img: 'https://placehold.co/300x420?text=One+Piece', price: 199.00 },
+  { id: 'm4', titleUk: 'Naruto — Наруто', titleEn: 'Naruto', desc: 'Фігурка Наруто', img: 'https://placehold.co/300x420?text=Naruto', price: 179.00 },
+  { id: 'm5', titleUk: 'Demon Slayer — Убивця демонів', titleEn: 'Demon Slayer', desc: 'Постер Tanjiro', img: 'https://placehold.co/300x420?text=Demon+Slayer', price: 159.00 },
+  { id: 'm6', titleUk: 'Fullmetal Alchemist — Сталевий алхімік', titleEn: 'Fullmetal Alchemist', desc: 'Колекційний артбук', img: 'https://placehold.co/300x420?text=FMA', price: 129.00 },
+  { id: 'm7', titleUk: 'Attack on Titan — Атака титанов', titleEn: 'Attack on Titan', desc: 'Плакат Eren', img: 'https://placehold.co/300x420?text=AoT', price: 139.00 },
+  { id: 'm8', titleUk: 'Tokyo Ghoul — Токіо гуль', titleEn: 'Tokyo Ghoul', desc: 'Футболка Kaneki', img: 'https://placehold.co/300x420?text=Tokyo+Ghoul', price: 119.00 },
+  { id: 'm9', titleUk: 'Bleach — Бліч', titleEn: 'Bleach', desc: 'Ключова фігурка', img: 'https://placehold.co/300x420?text=Bleach', price: 109.00 },
+  { id: 'm10', titleUk: 'Hunter x Hunter — Мисливець x Мисливець', titleEn: 'Hunter x Hunter', desc: 'Набір значків', img: 'https://placehold.co/300x420?text=HxH', price: 99.00 },
+  { id: 'm11', titleUk: 'Spirited Away Artbook — Віднесені привидами (артбук)', titleEn: 'Spirited Away Artbook', desc: 'Артбук Studio Ghibli', img: 'https://placehold.co/300x420?text=Ghibli+Artbook', price: 89.00 },
+  { id: 'm12', titleUk: `Your Name — Твоє ім'я (манга)`, titleEn: 'Your Name', desc: 'Манга-видання', img: 'https://placehold.co/300x420?text=Your+Name', price: 79.00 },
+
+  // додаткові
+  { id: 'm13', titleUk: 'Kimi no Na wa — Твоє ім\'я', titleEn: 'Kimi no Na wa', desc: 'Постер фільму', img: 'https://placehold.co/300x420?text=Kimi+no+Na+wa', price: 69.00 },
+  { id: 'm14', titleUk: 'Spirited Away — Віднесені привидами', titleEn: 'Spirited Away', desc: 'Фігурка Тоторо', img: 'https://placehold.co/300x420?text=Spirited+Away', price: 59.00 },
+  { id: 'm15', titleUk: 'Tonari no Totoro — Тоторо', titleEn: 'My Neighbor Totoro', desc: 'М' + "'" + 'яка фігурка', img: 'https://placehold.co/300x420?text=Totoro', price: 89.00 },
+  { id: 'm16', titleUk: 'Akira — Акіра', titleEn: 'Akira', desc: 'Колекційне видання', img: 'https://placehold.co/300x420?text=Akira', price: 129.00 },
+  { id: 'm17', titleUk: 'Nausicaa — Наусіка', titleEn: 'Nausicaa', desc: 'Плакат', img: 'https://placehold.co/300x420?text=Nausicaa', price: 49.00 },
+  { id: 'm18', titleUk: 'Violet Evergarden — Вайолет', titleEn: 'Violet Evergarden', desc: 'Артбук', img: 'https://placehold.co/300x420?text=Violet', price: 139.00 },
+  { id: 'm19', titleUk: 'Cowboy Bebop — Ковбой Біпоп', titleEn: 'Cowboy Bebop', desc: 'Саундтрек LP', img: 'https://placehold.co/300x420?text=Cowboy+Bebop', price: 159.00 },
+  { id: 'm20', titleUk: 'Berserk — Берсерк', titleEn: 'Berserk', desc: 'Манга-том', img: 'https://placehold.co/300x420?text=Berserk', price: 49.00 },
+  { id: 'm21', titleUk: 'Ghost in the Shell — Привид у броні', titleEn: 'Ghost in the Shell', desc: 'Плакат кіно', img: 'https://placehold.co/300x420?text=Ghost+in+the+Shell', price: 69.00 },
+  { id: 'm22', titleUk: 'Made in Abyss — Створений в безодні', titleEn: 'Made in Abyss', desc: 'Колекційна фігурка', img: 'https://placehold.co/300x420?text=Made+in+Abyss', price: 99.00 },
+  { id: 'm23', titleUk: 'The Promised Neverland — Обіцяний', titleEn: 'The Promised Neverland', desc: 'Манга-том', img: 'https://placehold.co/300x420?text=Promised+Neverland', price: 119.00 },
+
+  // 4 спеціальних
+  { id: 'm24', titleUk: 'Колекційна фігурка — Обмежена', titleEn: 'Limited Collector Figure', desc: 'Лімітована статуетка', img: 'https://placehold.co/300x420?text=Limited+Figure', price: 499.00, special: true },
+  { id: 'm25', titleUk: 'Артбук — Обмежене видання', titleEn: 'Artbook — Limited Edition', desc: 'Альбом з автографом', img: 'https://placehold.co/300x420?text=Artbook', price: 399.00, special: true },
+  { id: 'm26', titleUk: 'Фігурка преміум — Статуетка', titleEn: 'Premium Statue', desc: 'Преміум набір', img: 'https://placehold.co/300x420?text=Premium+Statue', price: 259.00, special: true },
+  { id: 'm27', titleUk: 'Box Set — Повна серія', titleEn: 'Box Set — Complete Series', desc: 'Повна серія + бонуси', img: 'https://placehold.co/300x420?text=Box+Set', price: 799.00, special: true }
 ];
 
-const productsEl = document.getElementById('products');
+const productsContainer = document.querySelector('#products .product-list') || document.querySelector('#products');
 const searchInput = document.getElementById('search');
 const clearBtn = document.getElementById('clearSearch');
 const themeToggle = document.getElementById('themeToggle');
+const wheelPlate = document.getElementById('wheelPlate');
+const spinWheel = document.getElementById('spinWheel');
+const wheelResult = document.getElementById('wheelResult');
 
 function renderProducts(list){
-  productsEl.innerHTML = '';
-  if(list.length === 0){
-    productsEl.innerHTML = '<p class="muted">Нічого не знайдено</p>';
-    return;
-  }
+  if(!productsContainer) return;
+  productsContainer.innerHTML = '';
+  if(!list || list.length === 0){ productsContainer.innerHTML = '<p class="muted">Нічого не знайдено</p>'; return; }
 
+  const lang = (localStorage.getItem('ml_lang') || 'uk');
   list.forEach(p => {
-    const card = document.createElement('article');
-    card.className = 'product hover-anim';
-    card.setAttribute('tabindex','0');
-    card.innerHTML = `
-      <img src="${p.img}" alt="${p.title}">
-      <h3 class="accent">${p.title}</h3>
-      <p>${p.desc}</p>
-      <div class="meta-row">
-        <span class="price">${p.price.toFixed(2)} ₴</span>
-        <button class="add-btn" data-id="${p.id}">Додати в кошик</button>
+    const li = document.createElement('li');
+    li.className = 'product-card';
+    li.dataset.id = p.id;
+    li.dataset.price = p.price;
+    li.dataset['title-uk'] = p.titleUk || p.titleEn || '';
+    li.dataset['title-en'] = p.titleEn || p.titleUk || '';
+    li.innerHTML = `
+      <img src="${p.img}" alt="${p.titleEn}" class="product-img">
+      <h3 class="product-title" data-i18n-title="${p.id}">${(lang==='uk'?p.titleUk:p.titleEn) || p.titleEn}</h3>
+      <p class="product-author">${p.desc}</p>
+      <div class="product-meta">
+        <span class="price">${Number(p.price).toFixed(2)} ₴</span>
+        <button class="add-to-cart btn" data-id="${p.id}" data-price="${p.price}">Додати в кошик</button>
       </div>
     `;
-
-    // Hover animation using anime.js: pulse color & scale
-    card.addEventListener('mouseenter', ()=> productHoverEnter(card));
-    card.addEventListener('mouseleave', ()=> productHoverLeave(card));
-    card.addEventListener('focus', ()=> productHoverEnter(card));
-    card.addEventListener('blur', ()=> productHoverLeave(card));
-
-  productsEl.appendChild(card);
+    productsContainer.appendChild(li);
   });
 
-  // Animated entrance
-  anime.remove('.product');
-  anime({
-    targets: '.product',
-    opacity: [0,1],
-    translateY: [12,0],
-    delay: anime.stagger(60),
-    duration: 500,
-    easing: 'easeOutQuad'
-  });
+  // entrance animation
+  anime.remove('.product-card');
+  anime({ targets: '.product-card', opacity: [0,1], translateY: [12,0], delay: anime.stagger(40), duration: 420, easing: 'easeOutQuad' });
 }
 
 /* ---- Cart logic ---- */
@@ -72,9 +89,20 @@ function saveCart(){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
 function getCartCount(){ return Object.values(cart).reduce((s,i)=>s+i.qty,0); }
 
 function updateCartUI(){
+  // If cart UI is not present on the page, only update a visible cart count (if any)
+  if(!cartItemsEl){
+    if(cartCountEl) cartCountEl.textContent = getCartCount();
+    return;
+  }
+
   cartItemsEl.innerHTML = '';
   const entries = Object.entries(cart);
-  if(entries.length === 0){ cartItemsEl.innerHTML = '<p class="muted">Кошик порожній</p>'; cartTotalEl.textContent = '0.00 ₴'; cartCountEl.textContent = '0'; return; }
+  if(entries.length === 0){
+    cartItemsEl.innerHTML = '<p class="muted">Кошик порожній</p>';
+    if(cartTotalEl) cartTotalEl.textContent = '0.00 ₴';
+    if(cartCountEl) cartCountEl.textContent = '0';
+    return;
+  }
 
   let total = 0;
   entries.forEach(([id, item])=>{
@@ -95,8 +123,8 @@ function updateCartUI(){
     total += item.price * item.qty;
   });
 
-  cartTotalEl.textContent = total.toFixed(2) + ' ₴';
-  cartCountEl.textContent = getCartCount();
+  if(cartTotalEl) cartTotalEl.textContent = total.toFixed(2) + ' ₴';
+  if(cartCountEl) cartCountEl.textContent = getCartCount();
   if(cartSumEl) cartSumEl.textContent = total.toFixed(2) + ' ₴';
 
   // attach qty handlers
@@ -115,35 +143,37 @@ function addToCart(productId){
   const p = productsData.find(x=> x.id == productId);
   if(!p) return;
   const key = String(p.id);
-  if(!cart[key]) cart[key] = { ...p, qty:0 };
+  if(!cart[key]) cart[key] = { id: p.id, title: p.titleUk || p.titleEn, img: p.img, price: Number(p.price), qty:0 };
   cart[key].qty += 1;
   saveCart();
   updateCartUI();
 
-  // Small fly-to-cart animation
-  const img = document.querySelector(`.product .add-btn[data-id="${productId}"]`)?.closest('.product')?.querySelector('img');
-  if(img){
+  // small fly-to-cart visual
+  const btn = document.querySelector(`button.add-to-cart[data-id="${productId}"]`);
+  const img = btn?.closest('.product-card')?.querySelector('img');
+  if(img && cartToggle){
     const clone = img.cloneNode();
     const rect = img.getBoundingClientRect();
     clone.style.position='fixed'; clone.style.left = rect.left+'px'; clone.style.top = rect.top+'px'; clone.style.width = rect.width+'px'; clone.style.zIndex = 120; document.body.appendChild(clone);
     const target = cartToggle.getBoundingClientRect();
-    anime({ targets: clone, left: target.left, top: target.top, width: 30, height: 24, rotate: '1turn', opacity: [1,0.6,0], easing: 'easeInOutQuad', duration: 700, complete(){ clone.remove(); } });
+    anime({ targets: clone, left: target.left, top: target.top, width: 28, height: 20, rotate: '0.5turn', opacity: [1,0.6,0], easing: 'easeInOutQuad', duration: 700, complete(){ clone.remove(); } });
   }
 }
 
-cartToggle.addEventListener('click', ()=>{ cartEl.classList.toggle('open'); cartEl.setAttribute('aria-hidden', !cartEl.classList.contains('open')); });
-closeCart.addEventListener('click', ()=>{ cartEl.classList.remove('open'); cartEl.setAttribute('aria-hidden','true'); });
+if(cartToggle) cartToggle.addEventListener('click', ()=>{ if(cartEl){ cartEl.classList.toggle('open'); cartEl.setAttribute('aria-hidden', String(!cartEl.classList.contains('open'))); } });
+if(closeCart) closeCart.addEventListener('click', ()=>{ if(cartEl){ cartEl.classList.remove('open'); cartEl.setAttribute('aria-hidden','true'); } });
 
 // attach add to cart handlers globally (delegate)
+// delegate add-to-cart
 document.addEventListener('click', (e)=>{
   const t = e.target;
-  if(t.matches('.add-btn')){ addToCart(t.dataset.id); }
+  if(t.closest && t.closest('.add-to-cart')){ const btn = t.closest('.add-to-cart'); addToCart(btn.dataset.id); }
 });
 
 // init
 updateCartUI();
 
-checkoutBtn.addEventListener('click', ()=>{
+if(checkoutBtn) checkoutBtn.addEventListener('click', ()=>{
   if(getCartCount() === 0) return;
   // Save order to orders list
   try {
@@ -155,9 +185,59 @@ checkoutBtn.addEventListener('click', ()=>{
     localStorage.setItem(ORDERS_KEY, JSON.stringify(prev));
   } catch (e) {}
 
-  alert('Оформлення замовлення (демо) — дякуємо!');
-  cart = {}; saveCart(); updateCartUI(); cartEl.classList.remove('open');
+  // show simple modal via existing orderModal if present
+  if(window.orderModal && window.orderModal.querySelector){
+    try{ window.orderModal.querySelector('#orderModalMessage').textContent = 'Дякуємо! Наш менеджер зв\'яжеться з вами.'; window.orderModal.hidden = false; window.orderModal.setAttribute('aria-hidden','false'); } catch(e){}
+  } else {
+    alert('Оформлення замовлення (демо) — дякуємо!');
+  }
+
+  cart = {}; saveCart(); updateCartUI(); cartEl && cartEl.classList.remove('open');
+  // refresh wheel (discounts may change)
+  initWheel();
 });
+
+// Wheel: fill with special items or top priced items
+function initWheel(){
+  if(!wheelPlate) return;
+  wheelPlate.innerHTML = '';
+  // prefer special items
+  let candidates = productsData.filter(p=>p.special).slice();
+  if(candidates.length < 6){
+    candidates = candidates.concat(productsData.slice().sort((a,b)=>b.price-a.price).filter(p=>!p.special).slice(0, 8 - candidates.length));
+  }
+  candidates.slice(0,8).forEach((p, idx)=>{
+    const discount = Math.floor(Math.random()*68);
+    const discounted = +(p.price * (1 - discount/100)).toFixed(2);
+    const item = document.createElement('div'); item.className = 'wheel-item';
+    const lang = localStorage.getItem('ml_lang') || 'uk';
+    const title = lang === 'uk' ? (p.titleUk || p.titleEn) : (p.titleEn || p.titleUk);
+    item.innerHTML = `<div class="wheel-title">${title}</div><div class="wheel-price">${discounted} ₴ <small>(${discount}% off)</small></div>`;
+    item.dataset.productId = p.id; item.dataset.discount = discount; item.dataset.discounted = discounted;
+    wheelPlate.appendChild(item);
+  });
+  anime.remove('.wheel-item');
+  anime({ targets: '.wheel-item', opacity: [0,1], translateY: [14,0], delay: anime.stagger(30), duration: 420, easing: 'easeOutQuad' });
+}
+
+// spin handler
+if(spinWheel){
+  spinWheel.addEventListener('click', ()=>{
+    const items = Array.from(wheelPlate.querySelectorAll('.wheel-item'));
+    if(!items.length) return;
+    const chosenIndex = Math.floor(Math.random()*items.length);
+    const rounds = 3 + Math.floor(Math.random()*4);
+    const anglePer = 360 / items.length;
+    const final = 360*rounds + chosenIndex * anglePer + anglePer/2;
+    anime({ targets: '#wheelPlate', rotate: final, duration: 1600, easing: 'easeOutCubic', complete(){
+      wheelPlate.style.transform = 'none';
+      items.forEach(it=> it.classList.remove('highlight'));
+      const chosen = items[chosenIndex]; chosen.classList.add('highlight');
+      wheelResult && (wheelResult.textContent = `Виграш: ${chosen.querySelector('.wheel-title').textContent} — ${chosen.dataset.discounted} ₴`);
+      anime({ targets: chosen, scale: [1,1.06,1], duration: 700, easing: 'easeOutElastic(1,.6)'});
+    }});
+  });
+}
 
 function productHoverEnter(el){
   anime.remove(el);
@@ -200,22 +280,29 @@ function productHoverLeave(el){
 function filterProducts(query){
   query = (query||'').toLowerCase().trim();
   if(!query) return productsData;
-  return productsData.filter(p => (p.title+ ' ' + p.desc).toLowerCase().includes(query));
+  return productsData.filter(p => {
+    const title = ((p.titleUk || '') + ' ' + (p.titleEn || '') + ' ' + (p.desc || '')).toLowerCase();
+    return title.includes(query);
+  });
+}
+if(searchInput){
+  searchInput.addEventListener('input', (e)=>{
+    const val = e.target.value;
+    renderProducts(filterProducts(val));
+
+    // search field hover pulse animation
+    anime.remove('#search');
+    anime({ targets: '#search', scale: [1,1.01,1], duration: 400, easing: 'easeInOutSine' });
+  });
 }
 
-searchInput.addEventListener('input', (e)=>{
-  const val = e.target.value;
-  renderProducts(filterProducts(val));
-
-  // search field hover pulse animation
-  anime.remove('#search');
-  anime({ targets: '#search', scale: [1,1.01,1], duration: 400, easing: 'easeInOutSine' });
-});
-
-clearBtn.addEventListener('click', ()=>{ searchInput.value=''; searchInput.dispatchEvent(new Event('input')); searchInput.focus(); });
+if(clearBtn){
+  clearBtn.addEventListener('click', ()=>{ if(searchInput){ searchInput.value=''; searchInput.dispatchEvent(new Event('input')); searchInput.focus(); } });
+}
 
 // Theme toggle
-themeToggle.addEventListener('click', ()=>{
+if(themeToggle){
+  themeToggle.addEventListener('click', ()=>{
   const isDark = document.body.classList.contains('theme-dark');
   if(isDark){
     // Переключаємо на світлу
@@ -243,8 +330,10 @@ themeToggle.addEventListener('click', ()=>{
   });
 
   // re-render to ensure colors applied
-  renderProducts(filterProducts(searchInput.value));
+  const currentSearch = (searchInput && searchInput.value) || '';
+  renderProducts(filterProducts(currentSearch));
 });
+}
 
 // Ініціалізація
 renderProducts(productsData);
